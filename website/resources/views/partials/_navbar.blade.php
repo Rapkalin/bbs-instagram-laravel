@@ -1,3 +1,6 @@
+@php
+    use \Illuminate\Support\Facades\Auth;
+@endphp
 <div class="navbar navbar-expand-sm navbar-light navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
@@ -13,7 +16,14 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My profil</a>
+                    @auth
+                        <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
+                        <form class="nav-item" action="{{ route('auth.logout') }}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="nav-link">Se déconnecter</button>
+                        </form>
+                    @endauth
                 </li>
                 <li class="nav-item dropdown">
                     <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />

@@ -1,16 +1,14 @@
+@php
+    use Illuminate\Support\Facades\Route as Route;
+@endphp
 @extends('layouts.app')
 
 @section('content')
 
-    <main class="bbs-instagram-container">
-        @include('components.card-grid')
-        <div
-            class="fb-like"
-            data-share="true"
-            data-width="450"
-            data-show-faces="true">
-        </div>
+    <main class="bbs-instagram-login">
+        {{--<a href="{{ $instagram_auth_url }}">Click to get Instgram permission</a>--}}
+        <a href="{{ route('users.create') }}">Créer un compte</a>
+        <a href="{{ route('auth.login') }}">Se connecter</a>
     </main>
-
 
 @stop

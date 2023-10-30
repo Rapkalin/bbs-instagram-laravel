@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InstagramAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +18,18 @@ use App\Http\Controllers\PostController;
 |
 */
 
+// Login
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'dologin'])->name('auth.dologin');
+Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
 // Home route
 Route::get('/', [HomeController::class, 'landing'])->name('home.landing');
 
-
 // User routes
-Route::get('/{slug}', [UserController::class, 'show'])->name('user.show');
-Route::get('/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::resource('users', UserController::class)->parameters(['user' => 'id']);
 
 // Post route
-Route::get('/{id}', [PostController::class, 'show'])->name('post.show');
+Route::get('/{id}', [PostController::class, 'show'])->name('post.show')->middleware('auth');
+Route::get('instagram-get-auth', [InstagramAuthController::class, 'show'])->middleware('auth');
 
