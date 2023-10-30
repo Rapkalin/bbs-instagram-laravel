@@ -21,8 +21,10 @@ git clone git@github.com:Rapkalin/bbs-instagram-laravel.git .
 ```
 
 #### 1.3_ Move to the project directory and install the backend dependencies:
-- cd bbs-instagram-laravel
-- composer install
+```
+cd bbs-instagram-laravel
+composer install
+```
 
 #### 1.4_ Copy the .env.sample file, rename it to .env and complete the needed variables:
 ```
@@ -53,11 +55,28 @@ WP_SITEURL=http://bbs-instagram-laravel.local/
 ```
 
 ### 2/ FRONTEND
-- For each update of the newsmatic theme, you have to change/refresh website/app/themes/newsmatic-child/assets/js/theme.js to reflect the change
+- This project build with Vite x Laravel.
+- Go to the website directory
+```
+  cd website
+```
+- Install the dependencies
+```
+  nvm use
+  npm install
+```
+- Build the frontend project
+```
+  npm run build
+```
+- Launch the dev mode
+```
+  npm run dev
+```
 
-## MEANING OF SOME DIRECTORIES AND FILES
+## GENERAL INFORMATIONS ON THE PROJECT
 
-### 3/ BRANCHES
+### 1/ BRANCHES
 We use a simple process due to low developer numbers working on this project.
 All development are made from the develop branch. 
 ```
@@ -68,7 +87,7 @@ All development are made from the develop branch.
   git push
 ```
 
-### 5/ HOW TO DEPLOY
+### 2/ HOW TO DEPLOY
 To use the auto-deploy using Github Workflows please follow the below instructions:
 - Commit and push your branch (feature/xxx) to main
 - Wait for approval and merge
