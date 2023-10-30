@@ -23,6 +23,9 @@ class UserController extends Controller
      */
     public function show (int $id)
     {
+        // We check if the user is allowed to access the current feed
+        $this->authorize('view', [User::class, $id]);
+
         $user = User::where('id', $id)->first(['name', 'email']);
         $profile = Profile::for($user->name);
         $instagramPosts = $profile?->feed(9);
