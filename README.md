@@ -54,6 +54,14 @@ WP_SITEURL=http://bbs-instagram-laravel.local/
  </VirtualHost>
 ```
 
+#### 1.6_ Run migrations
+- Publish the needed package migrations: Dymantic\InstagramFeed\InstagramFeedServiceProvider
+- Migrate 
+```
+php artisan vendor:publish
+php artisan migrate
+```
+
 ### 2/ FRONTEND
 - This project build with Vite x Laravel.
 - Go to the website directory
@@ -74,7 +82,7 @@ WP_SITEURL=http://bbs-instagram-laravel.local/
   npm run dev
 ```
 
-## GENERAL INFORMATIONS ON THE PROJECT
+## GENERAL INFORMATION ON THE PROJECT
 
 ### 1/ BRANCHES
 We use a simple process due to low developer numbers working on this project.
@@ -83,7 +91,7 @@ All development are made from the develop branch.
   git checkout develop
   git pull --rebase
   git add xxx
-  git commit -m "name-of-your branch"
+  git commit -m "name-of-your-branch"
   git push
 ```
 
