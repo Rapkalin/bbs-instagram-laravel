@@ -18,20 +18,22 @@
                 <li class="nav-item">
                     @auth
                         <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
-                        <form class="nav-item" action="{{ route('auth.logout') }}" method="post">
-                            @method('delete')
-                            @csrf
-                            <button class="nav-link">Se déconnecter</button>
-                        </form>
                     @endauth
+                    @guest
+                        <a class="nav-link" href="{{ route('auth.login') }}">Se connecter</a>
+                    @endguest
                 </li>
                 <li class="nav-item dropdown">
                     <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" data-turbo-method="delete" href="#">Log out</a>
-                    </div>
+                    @auth
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <form class="nav-item" action="{{ route('auth.logout') }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="nav-link">Se déconnecter</button>
+                                </form>
+                        </div>
+                    @endauth
                 </li>
                 <!--li class="nav-item"-->
                 <!--/li-->

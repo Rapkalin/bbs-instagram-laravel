@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '826125512846824',
-            xfbml      : true,
-            version    : 'v18.0'
-        });
-        FB.AppEvents.logPageView();
-    };
+@section('content')
 
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<div class="bbs-instagram-header">
+    <h1>Welcome {{ $user->name }}</h1>
+    <p>Here is your Instagram feed:</p>
+</div>
+
+<main class="bbs-instagram-container">
+    @include('components.card-grid')
+    <div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+    </div>
+</main>
+
+@endsection

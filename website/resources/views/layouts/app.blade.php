@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <title>Ma page HTML</title>
+        <title>BBS Instagram Feed</title>
     </head>
 
 
@@ -31,11 +31,7 @@
 
         @include('partials._navbar')
 
-        <div>
-            <header class="bbs-instagram-header">
-                <h1>Mes posts Instagram</h1>
-            </header>
-
+        <div class="main-bbs-content">
             @yield('content')
         </div>
 
