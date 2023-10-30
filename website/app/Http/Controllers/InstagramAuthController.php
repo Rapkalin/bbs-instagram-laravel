@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class InstagramAuthController extends Controller
 {
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function show ()
     {
-
         $user = User::where('id', Auth::user()->id)->first(['name', 'email']);
         $profile = Profile::for($user->name);
         $instagramPosts = $profile?->feed(9);

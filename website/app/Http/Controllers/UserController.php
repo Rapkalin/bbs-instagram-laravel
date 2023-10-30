@@ -11,12 +11,17 @@ use Dymantic\InstagramFeed\Profile;
 
 class UserController extends Controller
 {
-    public function __construct()
+    public function __construct ()
     {
         $this->middleware('auth')->except(['create', 'store']);
     }
 
-    public function show(int $id)
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show (int $id)
     {
         $user = User::where('id', $id)->first(['name', 'email']);
         $profile = Profile::for($user->name);
@@ -32,14 +37,18 @@ class UserController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create ()
     {
         return view('users.form');
     }
 
-    public function store(UserRequest $request)
+    /**
+     * @param UserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store (UserRequest $request)
     {
         $inputs = $request->validated();
         $name = strip_tags($inputs['name']);
@@ -53,15 +62,20 @@ class UserController extends Controller
             $user->password = $password;
             $user->save();
 
+            // We reconnect the user before the redirect so (s)he doesn't have to reconnect
             $request->session()->regenerate();
             Auth::loginUsingId($user->id);
             Profile::new($user->name);
 
-            // Tries to redirect the user to the intended route
+            // Redirect the user to his feed page
             return to_route('users.show', $user->id);
 
         } catch (\Exception $e) {
+
+            // We log the error
             Log::error($e->getMessage());
+
+            // We don't give too much info to the user to avoid hacking
             return to_route('users.create')->withErrors([
                 'name' => "Quelque chose s'est mal passé, veuillez réessayer"
             ]);
