@@ -16,7 +16,7 @@ return [
      * The base url used to generate to auth callback route for instagram.
      * This defaults to your APP_URL, so normally you may leave it as null
      */
-    'base_url' => null,
+    'base_url' => env('INSTAGRAM_APP_URL'),
 
     /*
      * The route that will respond to the Instagram callback during the OAuth process.

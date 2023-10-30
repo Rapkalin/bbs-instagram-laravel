@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Log;
+use Dymantic\InstagramFeed\Profile;
 
 class UserController extends Controller
 {
@@ -19,8 +19,16 @@ class UserController extends Controller
     public function show(int $id)
     {
         $user = User::where('id', $id)->first(['name', 'email']);
+        $profile = Profile::for($user->name);
+        $instagramPosts = $profile?->feed(9);
+        $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
+        $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile?->getInstagramAuthUrl() : null;
 
-        return view('users.show', ['user' => $user]);
+        return view('users.show', [
+            'user' => $user,
+            'instagramConnectUrl' => $instagramConnectUrl,
+            'instagramPosts' => $freshInstagramPosts ?: $instagramPosts
+        ]);
     }
 
     /**
@@ -43,10 +51,11 @@ class UserController extends Controller
             $user->name = $name;
             $user->email = $email;
             $user->password = $password;
-
             $user->save();
+
             $request->session()->regenerate();
             Auth::loginUsingId($user->id);
+            Profile::new($user->name);
 
             // Tries to redirect the user to the intended route
             return to_route('users.show', $user->id);

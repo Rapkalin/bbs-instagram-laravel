@@ -8,6 +8,6 @@ class PostController extends Controller
 {
     public function show()
     {
-        die('stop');
+        die('stop stop');
     }
 }

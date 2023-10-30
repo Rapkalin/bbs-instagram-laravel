@@ -22,7 +22,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required|unique:users,name',
             'email' => 'required|email',
             'password' => 'required|min:4'
         ];

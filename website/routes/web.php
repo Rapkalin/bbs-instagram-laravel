@@ -17,19 +17,17 @@ use App\Http\Controllers\InstagramAuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Home route
+Route::get('/', [HomeController::class, 'landing'])->name('home.landing');
 
 // Login
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'dologin'])->name('auth.dologin');
 Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// Home route
-Route::get('/', [HomeController::class, 'landing'])->name('home.landing');
-
 // User routes
 Route::resource('users', UserController::class)->parameters(['user' => 'id']);
 
-// Post route
-Route::get('/{id}', [PostController::class, 'show'])->name('post.show')->middleware('auth');
-Route::get('instagram-get-auth', [InstagramAuthController::class, 'show'])->middleware('auth');
+// Instagram routes
+Route::get('instagram-auth-success', [InstagramAuthController::class, 'show'])->middleware('auth');
 

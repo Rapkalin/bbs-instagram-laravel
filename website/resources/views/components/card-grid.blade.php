@@ -1,17 +1,6 @@
-<div class="cards">
-    @include('components.card')
-    @include('components.card')
-    @include('components.card')
-</div>
 
 <div class="cards">
-    @include('components.card')
-    @include('components.card')
-    @include('components.card')
-</div>
-
-<div class="cards">
-    @include('components.card')
-    @include('components.card')
-    @include('components.card')
+    @foreach($instagramPosts as $instagramPost)
+        @include('components.card', ['instagramPost' => $instagramPost])
+    @endforeach
 </div>

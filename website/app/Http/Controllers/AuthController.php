@@ -21,7 +21,7 @@ class AuthController extends Controller
         // Tries to login the user with the credentials if it works we redirect
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('users.show'));
+            return to_route('home.landing');
         }
 
         return to_route('auth.login')->withErrors([
