@@ -16,7 +16,6 @@ class UserController extends Controller
         $this->middleware('auth')->except(['create', 'store']);
     }
 
-
     /**
      * @param int $id
      * @return \Illuminate\Contracts\View\View

@@ -16,7 +16,7 @@ class InstagramAuthController extends Controller
     {
         // We check if the user is allowed to access the current feed
         $this->authorize('view', [User::class, Auth::user()->id]);
-        
+
         $user = User::where('id', Auth::user()->id)->first(['name', 'email']);
         $profile = Profile::for($user->name);
         $instagramPosts = $profile?->feed(9);
