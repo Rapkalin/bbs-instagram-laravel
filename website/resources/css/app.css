@@ -17,8 +17,16 @@
     height: 80vh;
 }
 
-.bbs-instagram-header {
+.bbs-landing-login {
    text-align: center;
+    margin-top: 0.5em;
+}
+
+.bbs-landing-login a {
+    margin-top: 1em;
+}
+
+.bbs-instagram-header {
     margin-top: 0.5em;
 }
 

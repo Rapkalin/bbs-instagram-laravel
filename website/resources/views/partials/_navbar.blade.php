@@ -17,7 +17,7 @@
                 </li>
                 <li class="nav-item">
                     @auth
-                        <a class="nav-link" href="{{ route('users.show', Auth::user()->id) }}">{{ Auth::user()->name }}</a>
+                        <a class="nav-link" href="{{ route('users.show', Auth::user()->id) }}">{{ ucfirst(Auth::user()->name )}}</a>
                     @endauth
                     @guest
                         <a class="nav-link" href="{{ route('auth.login') }}">Se connecter</a>

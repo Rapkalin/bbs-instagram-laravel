@@ -6,13 +6,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
     font-size: 24px;
     font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    margin-bottom: 0.5em;
+}
+.card-category:hover {
+    background-color: black;
 }
 
 .cards {
@@ -21,6 +21,13 @@
     grid-gap: 16px;
 }
 
+.bbs-box-login {
+    padding: 2em;
+}
+
+.bbs-alternativ-btn {
+    text-align: center;
+}
 /*Smallest device*/
 @media (min-width: 100px) and (max-width: 575px) {
     .cards {

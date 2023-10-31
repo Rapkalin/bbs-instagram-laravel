@@ -1,4 +1,8 @@
 <div
     class="card-category"
-    style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url({{ $instagramPost->url }})">
+    style="background-image: url({{ $instagramPost->url }})"
+    id="imageModalTrigger-{{ $instagramPost->id }}"
+    data-toggle="modal"
+    data-target="#imageModal">
+
 </div>
