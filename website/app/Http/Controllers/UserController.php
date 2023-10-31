@@ -25,11 +25,11 @@ class UserController extends Controller
         // We check if the user is allowed to access the current feed
         $this->authorize('view', [User::class, $id]);
 
-        $user = User::where('id', $id)->first(['name', 'email']);
+        $user = User::where('id', $id)->first(['name', 'email']); // Could have been in model
         $profile = Profile::for($user->name);
         $instagramPosts = $profile?->feed(9);
         $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
-        $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile?->getInstagramAuthUrl() : null;
+        $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
 
         return view('users.show', [
             'user' => $user,
