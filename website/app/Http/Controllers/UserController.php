@@ -39,8 +39,7 @@ class UserController extends Controller
         }
 
         // We retrieve the feed and if it already exists we refresh it
-        $instagramPosts = $profile?->feed(9);
-        $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
+        $instagramPosts = $this->get_instagram_feed($profile);
 
         // We check if the user is connected to Instagram and if not we display a button for connexion
         $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
@@ -48,7 +47,7 @@ class UserController extends Controller
         return view('users.show', [
             'user' => $user,
             'instagramConnectUrl' => $instagramConnectUrl,
-            'instagramPosts' => $freshInstagramPosts ?: $instagramPosts
+            'instagramPosts' => $instagramPosts
         ]);
     }
 
@@ -91,7 +90,7 @@ class UserController extends Controller
             // We log the error
             Log::error($e->getMessage());
 
-            // We don't give too much info to the user to avoid hacking
+            // We don't give too much info to the user to avoid helping potential hacking
             return to_route('users.create')->withErrors([
                 'name' => "Quelque chose s'est mal passé, veuillez réessayer"
             ]);
@@ -118,6 +117,21 @@ class UserController extends Controller
         return view('users.post', [
             'instagramPost' => $instagramPost
         ]);
+    }
+
+    /**
+     * @param Profile $profile
+     * @return \Dymantic\InstagramFeed\InstagramFeed|null
+     */
+    public function get_instagram_feed (Profile $profile)
+    {
+        $instagramPosts = $profile->feed(9);
+
+        if (count($instagramPosts) > 0) {
+            $freshInstagramPosts = $profile->refreshFeed(9);
+        }
+
+        return $freshInstagramPosts ?? $instagramPosts;
     }
 
 }
