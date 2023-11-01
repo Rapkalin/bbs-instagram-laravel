@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
@@ -25,8 +26,18 @@ class UserController extends Controller
         // We check if the user is allowed to access the current feed
         $this->authorize('view', [User::class, $id]);
 
+        // We retrieve user infos
         $user = User::where('id', $id)->first(['name', 'email']); // Could have been in model
         $profile = Profile::for($user->name);
+
+        // If the Instagram token is older than 15 days we refresh it
+        $dateNow = Carbon::now();
+        $lastTokenUpdate = $profile->latestToken()->updated_at;
+        if($lastTokenUpdate->diff($dateNow)->format('%a') > 15) {
+            $profile->refreshToken();
+        }
+
+        // We retrieve the feed and if it already exists we refresh it
         $instagramPosts = $profile?->feed(9);
         $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
         $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
