@@ -19,3 +19,5 @@ yarn-error.log
 /.vscode
 .DS_Store
 app/.DS_Store
+
+website/.vite
