@@ -1,0 +1,17 @@
+.bbs-instagram-image {
+    width: 20em;
+}
+
+.bbs-instagram-caption {
+    text-align: center;
+    font-size: small;
+    margin: 1em 2em;
+}
+
+.bbs-instagram-post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1em 1em 0 1em;
+}

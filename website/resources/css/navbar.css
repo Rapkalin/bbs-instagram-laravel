@@ -1,0 +1,22 @@
+.navbar, .navbar .nav-link {
+    justify-content: space-between;
+    background: white;
+    color: #1E2731;
+}
+
+.navbar .navbar-collapse {
+    flex-grow: 0;
+}
+
+.navbar .navbar-brand img {
+    width: 40px;
+}
+
+body {
+    background-color: #0b2e13;
+}
+
+.avatar {
+    width: 40px;
+    border-radius: 50%;
+}
