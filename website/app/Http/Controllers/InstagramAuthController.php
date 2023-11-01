@@ -21,7 +21,9 @@ class InstagramAuthController extends Controller
         $profile = Profile::for($user->name);
         $instagramPosts = $profile?->feed(9);
         $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
-        $instagramConnectUrl = !$instagramPosts ? $profile?->getInstagramAuthUrl() : null;
+
+        // We check if the user is connected to Instagram and if not we display a button for connexion
+        $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
 
         return view('users.show', [
             'user' => $user,

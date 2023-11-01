@@ -32,4 +32,5 @@ Route::get('users/{userId}/{postId}', [UserController::class, 'post'])->name('us
 
 // Instagram routes
 Route::get('instagram-auth-success', [InstagramAuthController::class, 'show'])->middleware('auth');
+Route::get('instagram-auth-failure', [InstagramAuthController::class, 'show'])->middleware('auth');
 

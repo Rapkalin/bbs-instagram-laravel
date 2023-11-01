@@ -33,8 +33,8 @@ class UserController extends Controller
 
         // If the Instagram token is older than 15 days we refresh it
         $dateNow = Carbon::now();
-        $lastTokenUpdate = $profile->latestToken()->updated_at;
-        if($lastTokenUpdate->diff($dateNow)->format('%a') > 15) {
+        $lastTokenUpdate = $profile?->latestToken()?->updated_at;
+        if($lastTokenUpdate && $lastTokenUpdate->diff($dateNow)->format('%a') > 15) {
             $profile->refreshToken();
         }
 
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         // We check if the user is connected to Instagram and if not we display a button for connexion
         $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
-
+        
         return view('users.show', [
             'user' => $user,
             'instagramConnectUrl' => $instagramConnectUrl,
