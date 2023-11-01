@@ -1,6 +1,6 @@
 ![laravel](https://img.shields.io/badge/laravel-v10-0678BE.svg?style=flat-square)
 ![php](https://img.shields.io/badge/PHP-v8.2-828cb7.svg?style=flat-square)
-![Node](https://img.shields.io/badge/node-v18-644D31.svg?style=flat-square)
+![Node](https://img.shields.io/badge/node-v19-644D31.svg?style=flat-square)
 ![composer](https://img.shields.io/badge/composer-v2.6.4-126E75.svg?style=flat-square)
 
 ## ABOUT
@@ -34,8 +34,8 @@ DATABASE_PASSWORD='your-database-password'
 DATABASE_HOST='localhost'
 
 WP_ENV=local
-WP_CONTENT_URL=http://bbs-instagram-laravel.local/
-WP_SITEURL=http://bbs-instagram-laravel.local/
+WP_CONTENT_URL=https://bbs-instagram-laravel.local/
+WP_SITEURL=https://bbs-instagram-laravel.local/
 
 ```
 
@@ -55,10 +55,8 @@ WP_SITEURL=http://bbs-instagram-laravel.local/
 ```
 
 #### 1.6_ Run migrations
-- Publish the needed package migrations: Dymantic\InstagramFeed\InstagramFeedServiceProvider
 - Migrate 
 ```
-php artisan vendor:publish
 php artisan migrate
 ```
 
