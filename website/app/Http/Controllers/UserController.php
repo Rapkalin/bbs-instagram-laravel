@@ -10,6 +10,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Log;
 use Dymantic\InstagramFeed\Profile;
 
+
 class UserController extends Controller
 {
     public function __construct ()
@@ -40,6 +41,8 @@ class UserController extends Controller
         // We retrieve the feed and if it already exists we refresh it
         $instagramPosts = $profile?->feed(9);
         $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
+
+        // We check if the user is connected to Instagram and if not we display a button for connexion
         $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
 
         return view('users.show', [
@@ -93,6 +96,28 @@ class UserController extends Controller
                 'name' => "Quelque chose s'est mal passé, veuillez réessayer"
             ]);
         }
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function post (int $userId, int $postId)
+    {
+        // We check if the user is allowed to access the current post
+        $this->authorize('view', [User::class, $userId]);
+
+        // We retrieve user infos
+        $user = User::where('id', $userId)->first(['name', 'email']); // Could have been in model
+        $profile = Profile::for($user->name);
+
+        // We retrieve the feed and if it already exists we refresh it
+        $instagramPosts = $profile?->feed(9);
+        $freshInstagramPosts = $instagramPosts ?: $profile?->refreshFeed(9);
+        $instagramPost = $freshInstagramPosts->collect()->where('id', $postId)->first();
+
+        return view('users.post', [
+            'instagramPost' => $instagramPost
+        ]);
     }
 
 }

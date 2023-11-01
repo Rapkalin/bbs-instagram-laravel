@@ -1,5 +1,6 @@
 @import "navbar.css";
 @import "card.css";
+@import "post.css";
 
 .bbs-instagram-body {
     margin: 0;
@@ -8,13 +9,13 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 .bbs-instagram-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
 }
 
 .bbs-landing-login {
@@ -35,7 +36,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
     height: 50px;
     background-color: white;
     color: #1E2731;
@@ -43,4 +43,5 @@
     left: 0px;
     right: 0px;
     margin-bottom: 0px;
+    margin-top: 2em;
 }

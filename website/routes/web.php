@@ -27,6 +27,9 @@ Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout')
 // User routes
 Route::resource('users', UserController::class)->parameters(['user' => 'id']);
 
+// User routes
+Route::get('users/{userId}/{postId}', [UserController::class, 'post'])->name('users.post');
+
 // Instagram routes
 Route::get('instagram-auth-success', [InstagramAuthController::class, 'show'])->middleware('auth');
 

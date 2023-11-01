@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="bbs-instagram-container">
-    <h1 class="bbs-instagram-header">Welcome {{ ucfirst($user->name) }}</h1>
+    <h1 class="bbs-instagram-header">Bonjour {{ ucfirst($user->name) }} !</h1>
     @if($instagramConnectUrl)
         <p>Vous ne semblez pas être connecté.</p>
         <a class="btn btn-success" href="{{ $instagramConnectUrl }}">Connecter Instagram</a>
