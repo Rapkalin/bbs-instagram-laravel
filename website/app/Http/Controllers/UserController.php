@@ -44,7 +44,7 @@ class UserController extends Controller
 
         // We check if the user is connected to Instagram and if not we display a button for connexion
         $instagramConnectUrl = !$profile->hasInstagramAccess() ? $profile->getInstagramAuthUrl() : null;
-        
+
         return view('users.show', [
             'user' => $user,
             'instagramConnectUrl' => $instagramConnectUrl,
